@@ -8,6 +8,8 @@
 #ifndef APLICACAO_H_
 #define APLICACAO_H_
 
+using namespace std;
+
 class Aplicacao {
 public:
 	Aplicacao();

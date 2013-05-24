@@ -8,8 +8,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "Aplicacao.h"
+using namespace std;
 
 int main(void) {
-	puts("Hello World!!!");
+//	puts("Hello World!!!");
+
+	Aplicacao app;
+	app.leitor();
 	return EXIT_SUCCESS;
 }

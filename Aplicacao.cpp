@@ -6,10 +6,34 @@
  */
 
 #include "Aplicacao.h"
+#include <iostream>
+#include <fstream>
 
 Aplicacao::Aplicacao() {
-	// TODO Auto-generated constructor stub
 
+}
+
+void Aplicacao::leitor(){
+	ifstream arquivo;
+	arquivo.open("iris.data");
+	char matriz[1500];
+	cout << "Iniciando...\n";
+
+	if(!arquivo.is_open()){
+		cout << "Nao foi possivel abrir o arquivo.\n";
+		arquivo.clear();
+	}
+	else{
+		string str;
+		arquivo >> str;
+		cout << str << endl;
+	}
+
+	while(arquivo.getline(matriz, 1500)){
+		cout << "Lendo arquivo...\n";
+		cout << matriz << "\n";
+	}
+	arquivo.close();
 }
 
 Aplicacao::~Aplicacao() {

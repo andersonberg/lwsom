@@ -1,6 +1,6 @@
 CXXFLAGS =	-O2 -g -Wall
 
-OBJS =		lwsom.o
+OBJS =		lwsom.o Aplicacao.o
 
 LIBS =
 
