@@ -23,9 +23,9 @@ void Aplicacao::leitor(){
 	ifstream arquivo;
 	arquivo.open("iris.data");
 	char matriz_linha[5000];
-	float matriz[150][5000];
+//	float matriz[150][5000];
 	int i = 0;
-	unsigned int j = 0;
+	long double num;
 
 	cout << "Iniciando...\n";
 
@@ -42,6 +42,8 @@ void Aplicacao::leitor(){
 			string sub;
 			iss >> sub;
 			cout << sub << endl;
+			num = atof(sub.c_str());
+			cout << num << endl;
 		}while (iss);
 
 		char a[1];
