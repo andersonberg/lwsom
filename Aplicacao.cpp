@@ -23,9 +23,10 @@ void Aplicacao::leitor(){
 	ifstream arquivo;
 	arquivo.open("iris.data");
 	char matriz_linha[5000];
-//	float matriz[150][5000];
+	float matriz[150][150];
 	int i = 0;
-	long double num;
+	float num;
+	int j;
 
 	cout << "Iniciando...\n";
 
@@ -38,14 +39,6 @@ void Aplicacao::leitor(){
 		string linha = matriz_linha;
 		istringstream iss(linha);
 
-		do{
-			string sub;
-			iss >> sub;
-			cout << sub << endl;
-			num = atof(sub.c_str());
-			cout << num << endl;
-		}while (iss);
-
 		char a[1];
 		a[0] = '#';
 		if (matriz_linha[0] == a[0]){
@@ -53,10 +46,17 @@ void Aplicacao::leitor(){
 			i = 0;
 		}
 		else{
-			cout << "Linha: " << i << endl;
-
+			j = 0;
+			do{
+				string sub;
+				iss >> sub;
+				num = atof(sub.c_str());
+				matriz[i][j] = num;
+//				cout << sub << endl;
+//				cout << num << endl;
+				j++;
+			}while (iss);
 		}
-		cout << matriz_linha << "\n";
 		i++;
 	}
 	arquivo.close();
