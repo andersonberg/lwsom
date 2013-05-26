@@ -6,12 +6,14 @@
  */
 
 #include "Aplicacao.h"
+#include "Matriz.h"
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
 #include <string>
+#include <list>
 
 using namespace std;
 
@@ -23,7 +25,8 @@ void Aplicacao::leitor(){
 	ifstream arquivo;
 	arquivo.open("iris.data");
 	char matriz_linha[5000];
-	float matriz[150][150];
+//	float matriz[150][150];
+	std::list<Matriz> matrizes_d;
 	int i = 0;
 	float num;
 	int j;
@@ -35,6 +38,7 @@ void Aplicacao::leitor(){
 		arquivo.clear();
 	}
 
+	Matriz matriz_d;
 	while(arquivo.getline(matriz_linha, 5000)){
 		string linha = matriz_linha;
 		istringstream iss(linha);
@@ -43,6 +47,7 @@ void Aplicacao::leitor(){
 		a[0] = '#';
 		if (matriz_linha[0] == a[0]){
 			cout << "\nIniciando nova matriz...\n";
+			matrizes_d.push_back(matriz_d);
 			i = 0;
 		}
 		else{
@@ -51,7 +56,7 @@ void Aplicacao::leitor(){
 				string sub;
 				iss >> sub;
 				num = atof(sub.c_str());
-				matriz[i][j] = num;
+				matriz_d.matriz[i][j] = num;
 //				cout << sub << endl;
 //				cout << num << endl;
 				j++;
