@@ -30,7 +30,9 @@ void Aplicacao::leitor(){
 	int i = 0;
 	float num;
 	int j;
+	char a[1];
 
+	a[0] = '#';
 	cout << "Iniciando...\n";
 
 	if(!arquivo.is_open()){
@@ -43,11 +45,11 @@ void Aplicacao::leitor(){
 		string linha = matriz_linha;
 		istringstream iss(linha);
 
-		char a[1];
-		a[0] = '#';
 		if (matriz_linha[0] == a[0]){
-			cout << "\nIniciando nova matriz...\n";
+			matriz_d.print_matriz();
+			matriz_d.matriz = new float*;
 			matrizes_d.push_back(matriz_d);
+			cout << "\nIniciando nova matriz...\n";
 			i = 0;
 		}
 		else{
@@ -64,6 +66,7 @@ void Aplicacao::leitor(){
 		}
 		i++;
 	}
+	matrizes_d.pop_back();
 	arquivo.close();
 }
 

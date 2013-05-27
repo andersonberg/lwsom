@@ -12,7 +12,8 @@ class Matriz {
 public:
 	Matriz();
 	virtual ~Matriz();
-	float matriz[150][150];
+	float** matriz;
+	void print_matriz();
 };
 
 #endif /* MATRIZ_H_ */
