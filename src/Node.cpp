@@ -7,8 +7,9 @@
 
 #include "Node.h"
 
-Node::Node() {
-	// TODO Auto-generated constructor stub
+Node::Node(vector<double> pesos, vector<int> coords) {
+	this->coords = coords;
+	this->pesos = pesos;
 
 }
 

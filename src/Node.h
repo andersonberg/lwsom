@@ -7,11 +7,16 @@
 
 #ifndef NODE_H_
 #define NODE_H_
+#include <vector>
+
+using namespace std;
 
 class Node {
 public:
-	Node();
+	Node(vector<double> pesos, vector<int> coords);
 	virtual ~Node();
+	vector<double> pesos;
+	vector<int> coords;
 };
 
 #endif /* NODE_H_ */

@@ -11,9 +11,15 @@
 class Matriz {
 public:
 	Matriz();
+//	explicit Matriz (unsigned int cols, unsigned int rows);
 	virtual ~Matriz();
-	float** matriz;
+	double** matriz;
 	void print_matriz();
+	Matriz clone();
+
+private:
+	unsigned int _cols;
+	unsigned int _rows;
 };
 
 #endif /* MATRIZ_H_ */
