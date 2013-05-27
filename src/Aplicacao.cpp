@@ -13,7 +13,11 @@
 #include <stdlib.h>
 #include <sstream>
 #include <string>
-#include <list>
+#include <vector>
+
+#define ROWS 150
+#define COLS 150
+#define NUM_MAT 4
 
 using namespace std;
 
@@ -25,12 +29,12 @@ void Aplicacao::leitor(){
 	ifstream arquivo;
 	arquivo.open("iris.data");
 	char matriz_linha[5000];
-//	float matriz[150][150];
-	std::list<Matriz> matrizes_d;
-	int i = 0;
+	vector<vector<vector<double> > > matrizes_d;
+//	double matrizes_d [NUM_MAT][ROWS][COLS];
+	int i = 0, j;
 	float num;
-	int j;
 	char a[1];
+	int matriz = 0;
 
 	a[0] = '#';
 	cout << "Iniciando...\n";
@@ -40,33 +44,42 @@ void Aplicacao::leitor(){
 		arquivo.clear();
 	}
 
-	Matriz matriz_d;
-	while(arquivo.getline(matriz_linha, 5000)){
-		string linha = matriz_linha;
-		istringstream iss(linha);
+	else{
+		// Alocando memória para o array tridimensional.
+		matrizes_d.resize(NUM_MAT);
+		for (int x = 0; x < NUM_MAT; ++x){
+			matrizes_d[x].resize(ROWS);
 
-		if (matriz_linha[0] == a[0]){
-			matriz_d.print_matriz();
-			matriz_d.matriz = new float*;
-			matrizes_d.push_back(matriz_d);
-			cout << "\nIniciando nova matriz...\n";
-			i = 0;
+			for (int y = 0; y < ROWS; ++y){
+				matrizes_d[x][y].resize(COLS);
+			}
 		}
-		else{
-			j = 0;
-			do{
-				string sub;
-				iss >> sub;
-				num = atof(sub.c_str());
-				matriz_d.matriz[i][j] = num;
-//				cout << sub << endl;
-//				cout << num << endl;
-				j++;
-			}while (iss);
+
+		while(arquivo.getline(matriz_linha, 5000)){
+			string linha = matriz_linha;
+			istringstream iss(linha);
+
+			if (matriz_linha[0] == a[0]){
+//				cout << "\nIniciando nova matriz...\n";
+				i = 0;
+				matriz++;
+			}
+			else{
+				j = 0;
+				do{
+					string sub;
+					iss >> sub;
+					if (sub != ""){
+						num = atof(sub.c_str());
+						matrizes_d[matriz][i][j] = num;
+//						cout << "matriz[" << matriz << "][" << i << "][" << j << "]: " << matrizes_d[matriz][i][j] << endl;
+					}
+					j++;
+				}while (iss);
+				i++;
+			}
 		}
-		i++;
 	}
-	matrizes_d.pop_back();
 	arquivo.close();
 }
 
