@@ -15,6 +15,7 @@ class Node {
 public:
 	Node(vector<double> pesos, vector<int> coords);
 	virtual ~Node();
+	float SqEuclidean(Node* node);
 	vector<double> pesos;
 	vector<int> coords;
 };
