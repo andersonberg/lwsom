@@ -13,6 +13,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include "Node.h"
 
 #define ROWS 150
 #define COLS 150
@@ -28,8 +29,7 @@ void Aplicacao::leitor(){
 	ifstream arquivo;
 	arquivo.open("iris.data");
 	char matriz_linha[5000];
-	vector<vector<vector<double> > > matrizes_d;
-//	double matrizes_d [NUM_MAT][ROWS][COLS];
+//	vector<vector<vector<double> > > matrizes_d;
 	int i = 0, j;
 	float num;
 	char a[1];
@@ -45,12 +45,12 @@ void Aplicacao::leitor(){
 
 	else{
 		// Alocando memória para o array tridimensional.
-		matrizes_d.resize(NUM_MAT);
+		this->matrizes_d.resize(NUM_MAT);
 		for (int x = 0; x < NUM_MAT; ++x){
-			matrizes_d[x].resize(ROWS);
+			this->matrizes_d[x].resize(ROWS);
 
 			for (int y = 0; y < ROWS; ++y){
-				matrizes_d[x][y].resize(COLS);
+				this->matrizes_d[x][y].resize(COLS);
 			}
 		}
 
@@ -70,8 +70,8 @@ void Aplicacao::leitor(){
 					iss >> sub;
 					if (sub != ""){
 						num = atof(sub.c_str());
-						matrizes_d[matriz][i][j] = num;
-//						cout << "matriz[" << matriz << "][" << i << "][" << j << "]: " << matrizes_d[matriz][i][j] << endl;
+						this->matrizes_d[matriz][i][j] = num;
+//						cout << "matriz[" << matriz << "][" << i << "][" << j << "]: " << this->matrizes_d[matriz][i][j] << endl;
 					}
 					j++;
 				}while (iss);
@@ -80,6 +80,10 @@ void Aplicacao::leitor(){
 		}
 	}
 	arquivo.close();
+}
+
+void Aplicacao::atualiza_prototipos(Node node){
+
 }
 
 Aplicacao::~Aplicacao() {

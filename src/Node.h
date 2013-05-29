@@ -15,9 +15,12 @@ class Node {
 public:
 	Node(vector<double> pesos, vector<int> coords);
 	virtual ~Node();
-	float SqEuclidean(Node* node);
+	float sqeuclidean(Node* node);
+	void atualiza_prototipo(vector<double>dissimilaridades, float temperatura);
 	vector<double> pesos;
 	vector<int> coords;
+	vector<double> prototipo;
+	vector<int> elementos;
 };
 
 #endif /* NODE_H_ */

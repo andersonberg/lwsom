@@ -14,7 +14,7 @@ Node::Node(vector<double> pesos, vector<int> coords) {
 
 }
 
-float Node::SqEuclidean(Node* node){
+float Node::sqeuclidean(Node* node){
 	float dist;
 	float diff;
 
@@ -25,6 +25,10 @@ float Node::SqEuclidean(Node* node){
 		}
 	}
 	return dist;
+}
+
+void Node::atualiza_prototipo(vector<double>dissimilaridades, float temperatura){
+
 }
 
 Node::~Node() {
