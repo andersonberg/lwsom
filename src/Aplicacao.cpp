@@ -82,8 +82,19 @@ void Aplicacao::leitor(){
 	arquivo.close();
 }
 
-void Aplicacao::atualiza_prototipos(Node node){
+void Aplicacao::atualiza_prototipos(Node* node, double temperatura){
+	float distancia;
+	double exponencial;
+	float fator;
 
+	fator = 2*pow(temperatura, 2);
+	for(int i = 0; i < (int)this->clusters.size(); i++){
+		Node* node_atual = this->clusters[i];
+		for(int j = 0; j < (int)node_atual->elementos.size(); j++){
+			distancia = node->sqeuclidean(node_atual);
+			exponencial = exp(-distancia/fator);
+		}
+	}
 }
 
 Aplicacao::~Aplicacao() {

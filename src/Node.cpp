@@ -15,13 +15,13 @@ Node::Node(vector<double> pesos, vector<int> coords) {
 }
 
 float Node::sqeuclidean(Node* node){
-	float dist;
+	float dist = 0;
 	float diff;
 
 	if (this->coords.size() == node->coords.size()){
-		for (int i = 0; i < this->coords.size(); i++){
-			diff = pow(this->coords[i] - node->coords[i], 2);
-			dist += diff;
+		for (int i = 0; i < (int)this->coords.size(); i++){
+			diff = this->coords[i] - node->coords[i];
+			dist += pow(diff, 2);
 		}
 	}
 	return dist;

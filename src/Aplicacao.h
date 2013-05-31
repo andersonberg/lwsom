@@ -18,7 +18,8 @@ public:
 	void leitor();
 	virtual ~Aplicacao();
 	vector<vector<vector<double> > > matrizes_d;
-	void atualiza_prototipos(Node node);
+	vector<Node> clusters;
+	void atualiza_prototipos(Node* node, double temperatura);
 };
 
 #endif /* APLICACAO_H_ */
