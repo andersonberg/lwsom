@@ -13,7 +13,9 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <cmath>
 #include "Node.h"
+#include <algorithm>
 
 #define ROWS 150
 #define COLS 150
@@ -22,7 +24,14 @@
 using namespace std;
 
 Aplicacao::Aplicacao() {
-
+	// Alocando memória para o array tridimensional.
+	this->matrizes_d.resize(NUM_MAT);
+	for (int x = 0; x < NUM_MAT; ++x){
+		this->matrizes_d[x].resize(ROWS);
+		for (int y = 0; y < ROWS; ++y){
+			this->matrizes_d[x][y].resize(COLS);
+		}
+	}
 }
 
 void Aplicacao::leitor(){
@@ -44,16 +53,6 @@ void Aplicacao::leitor(){
 	}
 
 	else{
-		// Alocando memória para o array tridimensional.
-		this->matrizes_d.resize(NUM_MAT);
-		for (int x = 0; x < NUM_MAT; ++x){
-			this->matrizes_d[x].resize(ROWS);
-
-			for (int y = 0; y < ROWS; ++y){
-				this->matrizes_d[x][y].resize(COLS);
-			}
-		}
-
 		while(arquivo.getline(matriz_linha, 5000)){
 			string linha = matriz_linha;
 			istringstream iss(linha);
@@ -82,19 +81,44 @@ void Aplicacao::leitor(){
 	arquivo.close();
 }
 
+void Aplicacao::inicializa_clusters(int xTam, int yTam){
+	int tamanho = xTam*yTam;
+
+	for(int i = 0; i < tamanho; i++){
+
+	}
+}
+
 void Aplicacao::atualiza_prototipos(Node* node, double temperatura){
 	float distancia;
 	double exponencial;
 	float fator;
+	Node* node_atual;
 
 	fator = 2*pow(temperatura, 2);
+
+	cout << "clusters size: " << this->clusters.size() << endl;
+
 	for(int i = 0; i < (int)this->clusters.size(); i++){
-		Node* node_atual = this->clusters[i];
+		node_atual = &this->clusters[i];
+
+		cout << "elementos size: " << node_atual->elementos.size() << endl;
+
 		for(int j = 0; j < (int)node_atual->elementos.size(); j++){
 			distancia = node->sqeuclidean(node_atual);
 			exponencial = exp(-distancia/fator);
+			cout << exponencial << endl;
 		}
 	}
+}
+
+vector<int> Aplicacao::generate_random(int tam){
+	vector<int> rnd_numb;
+
+	for(int i = 0; i < tam; i++) rnd_numb.push_back(i);
+	std::random_shuffle(rnd_numb.begin(), rnd_numb.end());
+
+	return rnd_numb;
 }
 
 Aplicacao::~Aplicacao() {
