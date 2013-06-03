@@ -16,5 +16,6 @@ int main(void) {
 
 	Aplicacao app;
 	app.leitor();
+	app.generate_random(150, 15);
 	return EXIT_SUCCESS;
 }

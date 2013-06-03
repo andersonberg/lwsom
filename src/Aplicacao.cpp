@@ -112,11 +112,17 @@ void Aplicacao::atualiza_prototipos(Node* node, double temperatura){
 	}
 }
 
-vector<int> Aplicacao::generate_random(int tam){
+vector<int> Aplicacao::generate_random(int tam, int resize){
 	vector<int> rnd_numb;
 
 	for(int i = 0; i < tam; i++) rnd_numb.push_back(i);
 	std::random_shuffle(rnd_numb.begin(), rnd_numb.end());
+
+	rnd_numb.resize(resize);
+
+	for(int j = 0; j < (int)rnd_numb.size(); j++){
+		cout << rnd_numb[j] << endl;
+	}
 
 	return rnd_numb;
 }
