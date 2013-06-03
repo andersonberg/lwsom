@@ -14,6 +14,8 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include <cstdlib>
+#include <ctime>
 #include "Node.h"
 #include <algorithm>
 
@@ -22,6 +24,9 @@
 #define NUM_MAT 4
 
 using namespace std;
+
+// função gerador aleatório
+int myrandom (int i) { return std::rand()%i;}
 
 Aplicacao::Aplicacao() {
 	// Alocando memória para o array tridimensional.
@@ -115,8 +120,9 @@ void Aplicacao::atualiza_prototipos(Node* node, double temperatura){
 vector<int> Aplicacao::generate_random(int tam, int resize){
 	vector<int> rnd_numb;
 
+	std::srand ( unsigned ( std::time(0) ) );
 	for(int i = 0; i < tam; i++) rnd_numb.push_back(i);
-	std::random_shuffle(rnd_numb.begin(), rnd_numb.end());
+	std::random_shuffle(rnd_numb.begin(), rnd_numb.end(), myrandom);
 
 	rnd_numb.resize(resize);
 
