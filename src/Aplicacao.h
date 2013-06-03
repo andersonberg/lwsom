@@ -22,6 +22,7 @@ public:
 	void atualiza_prototipos(Node* node, double temperatura);
 	void inicializa_clusters(int xTam, int yTam);
 	vector<int> generate_random(int tam, int resize);
+	void atualiza_particao();
 };
 
 #endif /* APLICACAO_H_ */

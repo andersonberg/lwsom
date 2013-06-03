@@ -146,6 +146,10 @@ vector<int> Aplicacao::generate_random(int tam, int resize){
 	return rnd_numb;
 }
 
+void Aplicacao::atualiza_particao(){
+
+}
+
 Aplicacao::~Aplicacao() {
 	// TODO Auto-generated destructor stub
 }
