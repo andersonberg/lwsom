@@ -88,9 +88,26 @@ void Aplicacao::leitor(){
 
 void Aplicacao::inicializa_clusters(int xTam, int yTam){
 	int tamanho = xTam*yTam;
+	int x;
+	int y;
+	int i = 0;
+	int amostra_tam;
+	vector<int> indices;
+	vector<double> pesos;
 
-	for(int i = 0; i < tamanho; i++){
+	amostra_tam = (int)this->matrizes_d[0][0].size();
+	indices = this->generate_random(amostra_tam, tamanho);
 
+	for(x = 0; x < xTam; x++){
+		for (y = 0; y < yTam; y++){
+			vector<int> coordenadas;
+			coordenadas.push_back(x);
+			coordenadas.push_back(y);
+			Node* newNode = new Node(pesos, coordenadas);
+			newNode->prototipos.push_back(indices[i]);
+			this->clusters.push_back(newNode);
+			i++;
+		}
 	}
 }
 
@@ -102,12 +119,8 @@ void Aplicacao::atualiza_prototipos(Node* node, double temperatura){
 
 	fator = 2*pow(temperatura, 2);
 
-	cout << "clusters size: " << this->clusters.size() << endl;
-
 	for(int i = 0; i < (int)this->clusters.size(); i++){
-		node_atual = &this->clusters[i];
-
-		cout << "elementos size: " << node_atual->elementos.size() << endl;
+		node_atual = this->clusters[i];
 
 		for(int j = 0; j < (int)node_atual->elementos.size(); j++){
 			distancia = node->sqeuclidean(node_atual);
@@ -126,9 +139,9 @@ vector<int> Aplicacao::generate_random(int tam, int resize){
 
 	rnd_numb.resize(resize);
 
-	for(int j = 0; j < (int)rnd_numb.size(); j++){
-		cout << rnd_numb[j] << endl;
-	}
+//	for(int j = 0; j < (int)rnd_numb.size(); j++){
+//		cout << rnd_numb[j] << endl;
+//	}
 
 	return rnd_numb;
 }

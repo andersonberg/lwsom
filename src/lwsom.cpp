@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 #include "Aplicacao.h"
 using namespace std;
 
@@ -16,6 +17,10 @@ int main(void) {
 
 	Aplicacao app;
 	app.leitor();
-	app.generate_random(150, 15);
+	app.inicializa_clusters(3,3);
+	cout << app.clusters.size() << endl;
+	for (int i = 0; i < (int)app.clusters.size(); i++){
+		app.atualiza_prototipos(app.clusters[i], 8);
+	}
 	return EXIT_SUCCESS;
 }

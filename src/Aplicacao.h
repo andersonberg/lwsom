@@ -18,7 +18,7 @@ public:
 	void leitor();
 	virtual ~Aplicacao();
 	vector<vector<vector<double> > > matrizes_d;
-	vector<Node> clusters;
+	vector<Node*> clusters;
 	void atualiza_prototipos(Node* node, double temperatura);
 	void inicializa_clusters(int xTam, int yTam);
 	vector<int> generate_random(int tam, int resize);

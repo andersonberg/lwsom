@@ -19,7 +19,7 @@ public:
 	void atualiza_prototipo(vector<double>dissimilaridades, float temperatura);
 	vector<double> pesos;
 	vector<int> coords;
-	vector<double> prototipo;
+	vector<int> prototipos;
 	vector<int> elementos;
 };
 
