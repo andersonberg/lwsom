@@ -146,8 +146,18 @@ vector<int> Aplicacao::generate_random(int tam, int resize){
 	return rnd_numb;
 }
 
-void Aplicacao::atualiza_particao(){
+void Aplicacao::atualiza_particao(double temperatura){
+	float distancia;
+	double exponencial;
+	float fator;
+	Node* node_atual;
+	vector<double> elemento_atual;
 
+	fator = 2*pow(temperatura, 2);
+
+	for (int i = 0; i < (int)this->matrizes_d[0].size(); i++){
+		elemento_atual = this->matrizes_d[0][i];
+	}
 }
 
 Aplicacao::~Aplicacao() {
