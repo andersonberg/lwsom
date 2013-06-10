@@ -18,9 +18,10 @@ int main(void) {
 	Aplicacao app;
 	app.leitor();
 	app.inicializa_clusters(3,3);
-	cout << app.clusters.size() << endl;
-	for (int i = 0; i < (int)app.clusters.size(); i++){
-		app.atualiza_prototipos(app.clusters[i], 8);
-	}
+	app.atualiza_particao(0.3);
+//	cout << app.clusters.size() << endl;
+//	for (int i = 0; i < (int)app.clusters.size(); i++){
+//		app.atualiza_prototipos(app.clusters[i], 8);
+//	}
 	return EXIT_SUCCESS;
 }
