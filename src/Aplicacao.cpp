@@ -151,12 +151,22 @@ void Aplicacao::atualiza_particao(double temperatura){
 	double exponencial;
 	float fator;
 	Node* node_atual;
+	Node* node;
 	vector<double> elemento_atual;
 
 	fator = 2*pow(temperatura, 2);
 
 	for (int i = 0; i < (int)this->matrizes_d[0].size(); i++){
 		elemento_atual = this->matrizes_d[0][i];
+
+		for(int i = 0; i < (int)this->clusters.size(); i++){
+				node_atual = this->clusters[i];
+				for(int j = 0; j < (int)this->clusters.size(); j++){
+					node = this-> clusters[j];
+					distancia = node->sqeuclidean(node_atual);
+					exponencial = exp(-distancia/fator);
+				}
+		}
 	}
 }
 
