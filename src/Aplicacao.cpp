@@ -86,7 +86,7 @@ void Aplicacao::leitor(){
 	arquivo.close();
 }
 
-void Aplicacao::inicializa_clusters(int xTam, int yTam){
+void Aplicacao::inicializa_clusters(int xTam, int yTam, int pTam){
 	int tamanho = xTam*yTam;
 	int x;
 	int y;
@@ -94,6 +94,11 @@ void Aplicacao::inicializa_clusters(int xTam, int yTam){
 	int amostra_tam;
 	vector<int> indices;
 	vector<double> pesos;
+
+	pesos.resize(pTam);
+	for (int x = 0; x < pTam; x++){
+		pesos[x] = 1;
+	}
 
 	amostra_tam = (int)this->matrizes_d[0][0].size();
 	indices = this->generate_random(amostra_tam, tamanho);
@@ -115,18 +120,38 @@ void Aplicacao::atualiza_prototipos(Node* node, double temperatura){
 	float distancia;
 	double exponencial;
 	float fator;
+	double soma_diss;
+	double soma_pesos;
+	double soma_i;
+	int prototipo;
 	Node* node_atual;
+	vector<double> criterios;
 
 	fator = 2*pow(temperatura, 2);
 
-	for(int i = 0; i < (int)this->clusters.size(); i++){
-		node_atual = this->clusters[i];
+	for(int c = 0; c < (int)this->clusters.size(); c++){
+		node_atual = this->clusters[c];
 
-		for(int j = 0; j < (int)node_atual->elementos.size(); j++){
+		for(int i = 0; i < (int)node_atual->elementos.size(); i++){
 			distancia = node->sqeuclidean(node_atual);
 			exponencial = exp(-distancia/fator);
-			cout << exponencial << endl;
+
+			soma_pesos = 0;
+			for (int j = 0; j < (int)this->matrizes_d.size(); j++){
+				// Obtém o somatório das dissimilaridades entre o protótipo e o elemento atual
+				soma_diss = 0;
+				for (int p = 0; p < (int)node->prototipos.size(); p++){
+					// j-> matriz atual
+					// i-> elemento atual
+					// p-> protótipo atual
+					prototipo = node->prototipos[p];
+					soma_diss += this->matrizes_d[j][i][prototipo];
+				}// fim do for do somatório de dissimilaridades
+				soma_pesos += node->pesos[j] * soma_diss;
+			}// fim do for de matrizes
+			soma_i += exponencial * soma_pesos;
 		}
+		criterios.push_back(soma_i);
 	}
 }
 
@@ -154,6 +179,7 @@ void Aplicacao::atualiza_particao(double temperatura){
 	double soma_pesos;
 	double soma_clusters;
 	float indice;
+	int prototipo;
 	Node* node_atual;
 	Node* node;
 	vector<double> elemento_atual;
@@ -180,7 +206,8 @@ void Aplicacao::atualiza_particao(double temperatura){
 						// j-> matriz atual
 						// i-> elemento atual
 						// p-> protótipo atual
-						soma_diss += this->matrizes_d[j][i][p];
+						prototipo = node->prototipos[p];
+						soma_diss += this->matrizes_d[j][i][prototipo];
 					}// fim do for do somatório de dissimilaridades
 					soma_pesos += node->pesos[j] * soma_diss;
 				}// fim do for de matrizes
@@ -189,7 +216,8 @@ void Aplicacao::atualiza_particao(double temperatura){
 			criterios.push_back(soma_clusters);
 		}
 		indice = std::min_element(criterios.begin(), criterios.end()) - criterios.begin();
-		cout << "menor indice: " << indice << endl;
+		this->clusters[indice]->elementos.push_back(i);
+		criterios.clear();
 	}
 }
 

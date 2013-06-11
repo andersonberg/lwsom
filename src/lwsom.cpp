@@ -17,8 +17,9 @@ int main(void) {
 
 	Aplicacao app;
 	app.leitor();
-	app.inicializa_clusters(3,3);
+	app.inicializa_clusters(3,3, app.matrizes_d.size());
 	app.atualiza_particao(0.3);
+	app.atualiza_prototipos(app.clusters[0], 0.3);
 //	cout << app.clusters.size() << endl;
 //	for (int i = 0; i < (int)app.clusters.size(); i++){
 //		app.atualiza_prototipos(app.clusters[i], 8);

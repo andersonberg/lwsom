@@ -20,7 +20,7 @@ public:
 	vector<vector<vector<double> > > matrizes_d;
 	vector<Node*> clusters;
 	void atualiza_prototipos(Node* node, double temperatura);
-	void inicializa_clusters(int xTam, int yTam);
+	void inicializa_clusters(int xTam, int yTam, int pTam);
 	vector<int> generate_random(int tam, int resize);
 	void atualiza_particao(double temperatura);
 };
